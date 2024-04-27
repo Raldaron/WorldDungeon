@@ -187,10 +187,10 @@ html {
 }
 
 .comment {
-    font-family: 'Bristol', cursive; /* Assuming 'Bristol' is available, replace with an available cursive font if needed */
+    font-family: "Libre Baskerville", serif;
     font-size: 0.9em;
     margin-left: 20px;
-    color: #555; /* Darker grey for comments */
+    color: #666; /* Darker grey for comments */
 }
 
 .author {
