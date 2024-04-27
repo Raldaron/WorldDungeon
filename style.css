@@ -206,11 +206,17 @@ html {
 }
 
 .comment {
-    font-family: 'Bristol', cursive; /* Assuming 'Bristol' is available, replace with an available cursive font if needed */
+    font-family: "Libre Baskerville", serif; /* Change font family to Libre Baskerville */
     font-size: 0.9em;
     text-align: right; /* Right-aligns comments */
     margin-right: 20px; /* Adds some space on the right if needed */
     color: #ffff; /* Darker grey for comments */
+}
+
+.author {
+    display: block;
+    font-style: italic;
+    color: #888; /* Light grey for author citation */
 }
 
 .author {
