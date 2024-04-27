@@ -82,6 +82,7 @@ html {
 
   .content {
     padding-left: 20px; /* Adjust as needed */
+    padding-right: 30px; 
     margin-left: 250px; /* Add margin to not overlap the sidebar */
     width: calc(100% - 250px); /* Adjust width considering sidebar */
     height: 100vh; /* Set to full height of the viewport */
