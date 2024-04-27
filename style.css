@@ -69,7 +69,7 @@ html {
   }
 
   .sidebar {
-    width: 250px; /* Fixed sidebar width for larger screens */
+    width: 150px; /* Fixed sidebar width for larger screens */
     height: 100vh; /* Set to full height of the viewport */
     position: fixed; /* Fixed position to the side */
     top: 0;
@@ -82,7 +82,7 @@ html {
 
   .content {
     padding-left: 20px; /* Adjust as needed */
-    padding-right: 30px; 
+    margin-right: 70px; 
     margin-left: 250px; /* Add margin to not overlap the sidebar */
     width: calc(100% - 250px); /* Adjust width considering sidebar */
     height: 100vh; /* Set to full height of the viewport */
@@ -93,7 +93,8 @@ html {
 }
   .content p {
   line-height: 1.9; /* Adjust the line height as needed */
-}
+  padding-right: 30px;
+  }
 
   }
 }
@@ -145,7 +146,7 @@ html {
 
 /* Full-width style for content when sidebar is collapsed */
 .content.full-width {
-  margin-left: 0; /* Content should start from the left edge */
+  margin-left: 20; /* Content should start from the left edge */
 }
 
 /* Hiding the scrollbar when it's not in use, for WebKit browsers */
