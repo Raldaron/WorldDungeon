@@ -70,7 +70,7 @@ function typeWriter(text, element, cursor, callback) {
         element.innerHTML += text.charAt(i);
         i++;
       }
-      setTimeout(typing, 40);
+      setTimeout(typing, 25);
     } else {
       cursor.style.animation = "none";
       if (callback) {
