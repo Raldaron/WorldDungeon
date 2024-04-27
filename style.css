@@ -183,9 +183,6 @@ html {
   top: 10px; /* Adjust vertical position */
 }
 /* ... other styles ... */
-.entry {
-    font-family: 'YourBodyFont', sans-serif; /* Replace 'YourBodyFont' with the actual font you are using for the body */
-}
 
 .comment {
     font-family: "Libre Baskerville", serif;
@@ -211,12 +208,6 @@ html {
     text-align: right; /* Right-aligns comments */
     margin-right: 20px; /* Adds some space on the right if needed */
     color: #ffff; /* Darker grey for comments */
-}
-
-.author {
-    display: block;
-    font-style: italic;
-    color: #888; /* Light grey for author citation */
 }
 
 .author {
