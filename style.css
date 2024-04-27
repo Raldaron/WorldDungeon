@@ -132,7 +132,8 @@ html {
 /* Styles to handle the content area when sidebar is collapsed */
 .content.collapsed {
   margin-left: 0; /* Remove margin when sidebar is collapsed */
-  padding-left: 60px;
+  padding-left: 60px; /* Add padding to compensate for collapsed sidebar width */
+  width: calc(100% - 60px); /* Adjust content width to fill the remaining space */
 }
 
 /* Add transition to sidebar and content for smooth collapsing effect */
