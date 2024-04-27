@@ -93,7 +93,6 @@ html {
 }
   .content p {
   line-height: 1.9; /* Adjust the line height as needed */
-  padding-right: 10px;
   }
 
   }
@@ -146,7 +145,7 @@ html {
 
 /* Full-width style for content when sidebar is collapsed */
 .content.full-width {
-  margin-left: 20; /* Content should start from the left edge */
+  margin-left: 0; /* Content should start from the left edge */
 }
 
 /* Hiding the scrollbar when it's not in use, for WebKit browsers */
