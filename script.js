@@ -3,22 +3,32 @@ document.addEventListener("DOMContentLoaded", function () {
   const sidebar = document.querySelector(".sidebar");
   const content = document.querySelector(".content");
 
+  // Start with the sidebar collapsed
+  sidebar.classList.add("collapsed");
+  content.classList.add("full-width"); // Add this class if it's being used in your CSS for handling content when sidebar is collapsed
+
   // Toggle sidebar visibility
   sidebarToggle.addEventListener("click", function () {
     sidebar.classList.toggle("collapsed");
-    content.classList.toggle("collapsed");
+    content.classList.toggle("full-width"); // Adjust this class based on your CSS
   });
 
   // Event listener for each section change
   document.querySelectorAll(".sidebar ul li").forEach((item) => {
     item.addEventListener("click", function () {
       changeSection(this.id);
+      // If on a small screen, collapse the sidebar after selecting a section
+      if(window.innerWidth < 361) {
+        sidebar.classList.add("collapsed");
+        content.classList.add("full-width");
+      }
     });
   });
 
   // Initialize with the cover page
   showCover();
 });
+
 
 function changeSection(sectionId) {
   const contentArea = document.querySelector(".main-content");
