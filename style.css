@@ -81,7 +81,7 @@ html {
   }
 
   .content {
-    padding-left: 20px; /* Adjust as needed */
+    padding-left: 80px; /* Adjust as needed */
     margin-right: 10px; 
     margin-left: 250px; /* Add margin to not overlap the sidebar */
     width: calc(100% - 250px); /* Adjust width considering sidebar */
