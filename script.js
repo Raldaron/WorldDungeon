@@ -5,33 +5,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Start with the sidebar collapsed
   sidebar.classList.add("collapsed");
-  content.classList.add("full-width"); // Add this class if it's being used in your CSS for handling content when sidebar is collapsed
+  content.classList.add("full-width"); // Ensure this class exists in your CSS
 
-  // Toggle sidebar visibility
   sidebarToggle.addEventListener("click", function () {
     sidebar.classList.toggle("collapsed");
-    content.classList.toggle("full-width"); // Adjust this class based on your CSS
+    content.classList.toggle("full-width"); // Ensure this class exists in your CSS
   });
 
-  // Event listener for each section change
   document.querySelectorAll(".sidebar ul li").forEach((item) => {
     item.addEventListener("click", function () {
       changeSection(this.id);
-      // If on a small screen, collapse the sidebar after selecting a section
-      if(window.innerWidth < 361) {
+      if (window.innerWidth < 361) {
         sidebar.classList.add("collapsed");
         content.classList.add("full-width");
       }
     });
   });
 
-  // Initialize with the cover page
   showCover();
 });
 
-
 function changeSection(sectionId) {
-  const contentArea = document.querySelector(".main-content");
+  const contentArea = document.querySelector(".content");
   const sectionData = sectionContent[sectionId];
 
   if (sectionData) {
@@ -50,28 +45,28 @@ function changeSection(sectionId) {
 }
 
 function showCover() {
-  const contentArea = document.querySelector(".main-content");
+  const contentArea = document.querySelector(".content");
   contentArea.innerHTML = '<p class="cover-text"></p>';
-  const cursorSpan = document.createElement("span");
-  cursorSpan.classList.add("cursor");
-  contentArea.querySelector(".cover-text").appendChild(cursorSpan);
 
   const fullText =
     "Hello, Crawler.<br><br>" +
     "As you’re about to find, this is a very special book.<br><br>" +
     "If you’re reading these words, it means this book has found its way into your hands for one purpose and one purpose only.<br><br>" +
     "Together, we will burn it all to the ground.";
+
   typeWriter(
     fullText,
     contentArea.querySelector(".cover-text"),
-    cursorSpan,
+    false,
     showContinuePrompt
   );
 }
 
-function typeWriter(text, element, cursor, callback) {
+function typeWriter(text, element, isSlow, callback) {
   let i = 0;
-  function typing() {
+  let speed = isSlow ? 200 : 50; // Slower for 'Continue?' prompt
+
+  (function type() {
     if (i < text.length) {
       if (text.substring(i, i + 4) === "<br>") {
         element.innerHTML += "<br>";
@@ -80,36 +75,50 @@ function typeWriter(text, element, cursor, callback) {
         element.innerHTML += text.charAt(i);
         i++;
       }
-      setTimeout(typing, 25);
-    } else {
-      cursor.style.animation = "none";
-      if (callback) {
-        callback();
-      }
+      setTimeout(type, speed);
+    } else if (callback) {
+      callback();
     }
-  }
-  typing();
+  })();
 }
 
 function showContinuePrompt() {
-  const contentArea = document.querySelector(".main-content");
-  const continueContainer = document.createElement("div");
-  continueContainer.innerHTML = "<h2>Do You Wish To Continue?</h2>";
+  const contentArea = document.querySelector(".content");
+  const continuePrompt = document.createElement("p");
+  continuePrompt.classList.add("continue-prompt");
+  contentArea.appendChild(continuePrompt);
 
-  const yesButton = document.createElement("button");
-  yesButton.innerText = "Yes";
-  yesButton.onclick = continueStory;
-  const noButton = document.createElement("button");
-  noButton.innerText = "No";
-  noButton.onclick = () => alert("No was clicked.");
+  const promptText = "Wont You Join Us?<br>";
+  typeWriter(promptText, continuePrompt, true, function () {
+    // Create button container
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("button-container");
 
-  continueContainer.appendChild(yesButton);
-  continueContainer.appendChild(noButton);
-  contentArea.appendChild(continueContainer);
+    // Create 'Yes' button
+    const yesButton = document.createElement("button");
+    yesButton.innerText = "Yes";
+    yesButton.classList.add("yes-button");
+    yesButton.onclick = continueStory;
+
+    // Create 'No' button
+    const noButton = document.createElement("button");
+    noButton.innerText = "No";
+    noButton.classList.add("no-button");
+    noButton.onclick = function () {
+      alert("No was clicked.");
+    };
+
+    // Append buttons to the button container
+    buttonContainer.appendChild(yesButton);
+    buttonContainer.appendChild(noButton);
+
+    // Append the button container to the content area
+    contentArea.appendChild(buttonContainer);
+  });
 }
 
 function continueStory() {
-  const contentArea = document.querySelector(".main-content");
+  const contentArea = document.querySelector(".content");
   contentArea.innerHTML = '<p class="cover-text"></p>';
   const cursorSpan = document.createElement("span");
   cursorSpan.classList.add("cursor");
@@ -132,11 +141,8 @@ function continueStory() {
     "This is important. While this book’s contents may be invisible, your actions are not. You must become an actor. " +
     "Every recipe, every secret, if utilized, must be presented to the outside world as if you are discovering this all on your own. How you do that is up to you. " +
     "Do not spend too much time staring at these pages.";
-  typeWriter(
-    additionalText,
-    contentArea.querySelector(".cover-text"),
-    cursorSpan
-  );
+
+  typeWriter(additionalText, contentArea.querySelector(".cover-text"), false);
 }
 
 const sectionContent = {
