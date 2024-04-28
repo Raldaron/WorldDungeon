@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap');
 /* Base styles */
 body,
 html {
@@ -216,4 +217,12 @@ html {
     font-style: italic;
     color: #888; /* Light grey for author citation */
 }
-
+/* Continue prompt styles */
+.continue-prompt {
+    font-size: 2em; /* Larger font size for the prompt */
+    font-family: 'Cedarville Cursive', cursive; /* Apply Cedarville Cursive */
+    margin-top: 20px; /* Add some space before the prompt */
+    color: #f8f8f2; /* Ensuring text color is visible */
+}
+    margin-top: 20px; /* Add some space before the prompt */
+}
