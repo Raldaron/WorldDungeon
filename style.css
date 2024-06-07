@@ -105,6 +105,22 @@ button:hover {
     background-color: #52606d;
 }
 
+.reset-button {
+    background-color: #d9534f;
+    color: #e0e0e0;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.reset-button:hover {
+    background-color: #c9302c;
+}
+
 section {
     margin-bottom: 20px;
 }
