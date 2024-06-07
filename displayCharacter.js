@@ -23,15 +23,15 @@ function displayCharacter() {
     let statPoints = 2 * level - Object.values(stats).reduce((a, b) => a + b, 0);
     let skillPoints;
     if (level >= 1 && level <= 5) {
-        skillPoints = 6 * level - Object.values(skills).reduce((a, b) => a + b, 0);
+        skillPoints = 6 * level - calculateSkillPointsUsed(skills);
     } else if (level >= 6 && level <= 10) {
-        skillPoints = 8 * level - Object.values(skills).reduce((a, b) => a + b, 0);
+        skillPoints = 8 * level - calculateSkillPointsUsed(skills);
     } else if (level >= 11 && level <= 15) {
-        skillPoints = 10 * level - Object.values(skills).reduce((a, b) => a + b, 0);
+        skillPoints = 10 * level - calculateSkillPointsUsed(skills);
     } else if (level >= 16 && level <= 20) {
-        skillPoints = 12 * level - Object.values(skills).reduce((a, b) => a + b, 0);
+        skillPoints = 12 * level - calculateSkillPointsUsed(skills);
     } else if (level >= 21) {
-        skillPoints = 14 * level - Object.values(skills).reduce((a, b) => a + b, 0);
+        skillPoints = 14 * level - calculateSkillPointsUsed(skills);
     }
 
     document.getElementById('availableStatPoints').textContent = statPoints;
@@ -129,6 +129,16 @@ function displayCharacter() {
     const abilityPoints = sessionStorage.getItem('abilityPoints') || '0';
     const abilityPointsContainer = document.getElementById('charAbilityPoints');
     abilityPointsContainer.value = abilityPoints;
+}
+
+function calculateSkillPointsUsed(skills) {
+    let totalPoints = 0;
+    Object.values(skills).forEach(level => {
+        for (let i = 1; i <= level; i++) {
+            totalPoints += i;
+        }
+    });
+    return totalPoints;
 }
 
 function editCharacter() {
