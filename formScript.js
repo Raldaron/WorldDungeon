@@ -49,7 +49,7 @@ function populateStats() {
     statsContainer.innerHTML = '';
     Object.keys(allocatedStatPoints).forEach(stat => {
         const statElement = document.createElement('div');
-        statElement.innerHTML = `<label>${stat}: </label><input type="number" id="${stat}" value="${allocatedStatPoints[stat]}" min="0" max="15" onchange="updateStatPoints('${stat}', this.value)" class="hidden"><span ondblclick="editStat('${stat}')">${allocatedStatPoints[stat]}</span><br>`;
+        statElement.innerHTML = `<label>${stat}: </label><input type="number" id="${stat}" value="${allocatedStatPoints[stat]}" min="0" max="15" onchange="updateStatPoints('${stat}', this.value)"><br>`;
         statsContainer.appendChild(statElement);
     });
 }
@@ -75,7 +75,7 @@ function populateSkills() {
     skillsContainer.innerHTML = '';
     Object.keys(allocatedSkillPoints).sort().forEach(skill => {
         const skillElement = document.createElement('div');
-        skillElement.innerHTML = `<label>${skill}: </label><input type="number" id="skill_${skill}" value="${allocatedSkillPoints[skill]}" min="0" onchange="updateSkillPoints('${skill}', this.value)" class="hidden"><span ondblclick="editSkill('${skill}')">${allocatedSkillPoints[skill]}</span><br>`;
+        skillElement.innerHTML = `<label>${skill}: </label><input type="number" id="skill_${skill}" value="${allocatedSkillPoints[skill]}" min="0" onchange="updateSkillPoints('${skill}', this.value)"><br>`;
         skillsContainer.appendChild(skillElement);
     });
 }
@@ -139,6 +139,7 @@ function submitCharacter() {
     const occupation = document.getElementById('occupation').value;
     sessionStorage.setItem('name', name);
     sessionStorage.setItem('occupation', occupation);
+    sessionStorage.setItem('level', '1'); // Start at level 1
     sessionStorage.setItem('stats', JSON.stringify(allocatedStatPoints));
     sessionStorage.setItem('skills', JSON.stringify(allocatedSkillPoints));
     sessionStorage.setItem('inventory', JSON.stringify(Object.keys(inventoryItems).filter(item => inventoryItems[item].selected)));
@@ -163,15 +164,3 @@ function submitCharacter() {
 window.onload = function() {
     nextStep(1); // Start at step 1
 };
-
-function editStat(stat) {
-    document.getElementById(stat).classList.remove('hidden');
-    document.querySelector(`[ondblclick="editStat('${stat}')"]`).classList.add('hidden');
-    document.getElementById(stat).focus();
-}
-
-function editSkill(skill) {
-    document.getElementById(`skill_${skill}`).classList.remove('hidden');
-    document.querySelector(`[ondblclick="editSkill('${skill}')"]`).classList.add('hidden');
-    document.getElementById(`skill_${skill}`).focus();
-}
