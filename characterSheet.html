@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Sheet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="character-sheet">
+    <header class="character-header">
+        <h1 id="charName">Dungeon Crawler Carl</h1>
+        <p id="charOccupation">Level 10 Human Warrior</p>
+        <button class="edit-button" onclick="editCharacter()">Edit</button>
+    </header>
+
+    <div class="character-info">
+        <div>
+            <p>Level</p>
+            <input type="number" id="charLevel" value="10" onchange="updateLevel()">
+        </div>
+        <div>
+            <p>HP</p>
+            <p id="charHP">100</p>
+        </div>
+        <div>
+            <p>MP</p>
+            <p id="charMP">50</p>
+        </div>
+        <div>
+            <p>Available Stat Points</p>
+            <p id="availableStatPoints">0</p>
+        </div>
+        <div>
+            <p>Available Skill Points</p>
+            <p id="availableSkillPoints">0</p>
+        </div>
+    </div>
+    
+    <section class="stats">
+        <h2>Stats</h2>
+        <div class="stats-grid">
+            <div class="stat">
+                <h3>Physical</h3>
+                <p>Strength: <span id="statStrength" ondblclick="editStat('Strength')">10</span></p>
+                <p>Dexterity: <span id="statDexterity" ondblclick="editStat('Dexterity')">10</span></p>
+                <p>Stamina: <span id="statStamina" ondblclick="editStat('Stamina')">10</span></p>
+            </div>
+            <div class="stat">
+                <h3>Mental</h3>
+                <p>Intelligence: <span id="statIntelligence" ondblclick="editStat('Intelligence')">10</span></p>
+                <p>Perception: <span id="statPerception" ondblclick="editStat('Perception')">10</span></p>
+                <p>Wit: <span id="statWit" ondblclick="editStat('Wit')">10</span></p>
+            </div>
+            <div class="stat">
+                <h3>Social</h3>
+                <p>Charisma: <span id="statCharisma" ondblclick="editStat('Charisma')">10</span></p>
+                <p>Manipulation: <span id="statManipulation" ondblclick="editStat('Manipulation')">10</span></p>
+                <p>Appearance: <span id="statAppearance" ondblclick="editStat('Appearance')">10</span></p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="expertise">
+        <h2>Expertise</h2>
+        <div class="expertise-grid">
+            <!-- Skill elements will be dynamically populated -->
+        </div>
+    </section>
+    
+    <footer class="hints">
+        <h2>Hint</h2>
+        <p>Watch for traps in the dungeon.</p>
+    </footer>
+</div>
+<script src="displayCharacter.js"></script>
+</body>
+</html>

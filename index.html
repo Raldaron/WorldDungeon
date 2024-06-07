@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Creation Form</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="formScript.js" defer></script>
+</head>
+<body>
+<div id="formContainer">
+    <!-- Step 1: Basic Info -->
+    <div id="step1" class="step">
+        <h2>Step 1: Basic Information</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name">
+        <label for="occupation">Occupation:</label>
+        <input type="text" id="occupation">
+        <button onclick="nextStep(2)">Next</button>
+    </div>
+
+    <!-- Step 2: Stat Points Assignment -->
+    <div id="step2" class="step" style="display:none;">
+        <h2>Step 2: Assign Stat Points</h2>
+        <p>Total Points: <span id="totalPoints">60</span></p>
+        <div id="stats"></div>
+        <button onclick="nextStep(3)">Next</button>
+    </div>
+
+    <!-- Step 3: Skill Points Assignment -->
+    <div id="step3" class="step" style="display:none;">
+        <h2>Step 3: Assign Skill Points</h2>
+        <p>Available Points: <span id="availableSkillPoints">25</span></p>
+        <div id="skills"></div>
+        <button onclick="nextStep(4)">Next</button>
+    </div>
+
+    <!-- Step 4: Inventory Selection -->
+    <div id="step4" class="step" style="display:none;">
+        <h2>Step 4: Select Starting Inventory</h2>
+        <div id="inventory"></div>
+        <button onclick="nextStep(5)">Next</button>
+    </div>
+
+    <!-- Step 5: Review & Confirm -->
+    <div id="step5" class="step" style="display:none;">
+        <h2>Step 5: Review Your Character</h2>
+        <div id="review"></div>
+        <button onclick="submitCharacter()">Create Character</button>
+    </div>
+</div>
+</body>
+</html>
