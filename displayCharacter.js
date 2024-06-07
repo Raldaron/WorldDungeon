@@ -1,17 +1,21 @@
 function displayCharacter() {
     const name = sessionStorage.getItem('name');
     const occupation = sessionStorage.getItem('occupation');
-    let level = parseInt(sessionStorage.getItem('level'));
-    const stats = JSON.parse(sessionStorage.getItem('stats'));
-    const skills = JSON.parse(sessionStorage.getItem('skills'));
-    const inventory = JSON.parse(sessionStorage.getItem('inventory'));
+    let level = parseInt(sessionStorage.getItem('level')) || 1; // Default to level 1 if not set
+    const stats = JSON.parse(sessionStorage.getItem('stats')) || {
+        Strength: 0, Dexterity: 0, Stamina: 0,
+        Intelligence: 0, Perception: 0, Wit: 0,
+        Charisma: 0, Manipulation: 0, Appearance: 0
+    };
+    const skills = JSON.parse(sessionStorage.getItem('skills')) || {};
+    const inventory = JSON.parse(sessionStorage.getItem('inventory')) || [];
 
     const hp = stats.Stamina * 5;
     const mp = stats.Intelligence * 5;
 
-    document.getElementById('charName').textContent = name;
-    document.getElementById('charOccupation').textContent = occupation;
-    document.getElementById('charLevel').value = level;
+    document.getElementById('charName').textContent = name || 'Unnamed';
+    document.getElementById('charOccupation').textContent = occupation || 'Unemployed';
+    document.getElementById('charLevel').textContent = level;
     document.getElementById('charHP').textContent = hp;
     document.getElementById('charMP').textContent = mp;
 
@@ -61,7 +65,7 @@ function displayCharacter() {
     });
 
     // Populate actions
-    const actions = JSON.parse(sessionStorage.getItem('actions'));
+    const actions = JSON.parse(sessionStorage.getItem('actions')) || [];
     const actionGrid = document.querySelector('.action-grid');
     actionGrid.innerHTML = ''; // Clear previous content
     actions.forEach(action => {
@@ -76,7 +80,7 @@ function displayCharacter() {
     });
 
     // Populate spells
-    const spells = JSON.parse(sessionStorage.getItem('spells'));
+    const spells = JSON.parse(sessionStorage.getItem('spells')) || [];
     const spellsList = document.querySelector('.spells-list');
     spellsList.innerHTML = ''; // Clear previous content
     spells.forEach(spell => {
@@ -90,7 +94,7 @@ function displayCharacter() {
     });
 
     // Populate equipment
-    const equipment = JSON.parse(sessionStorage.getItem('equipment'));
+    const equipment = JSON.parse(sessionStorage.getItem('equipment')) || [];
     const equipmentList = document.querySelector('.equipment-list');
     equipmentList.innerHTML = ''; // Clear previous content
     equipment.forEach(item => {
@@ -132,7 +136,14 @@ function editCharacter() {
 }
 
 function updateLevel() {
-    let level = parseInt(document.getElementById('charLevel').value);
+    let level = parseInt(document.getElementById('charLevel').textContent);
+    sessionStorage.setItem('level', level);
+    displayCharacter();
+}
+
+function increaseLevel() {
+    let level = parseInt(document.getElementById('charLevel').textContent);
+    level += 1;
     sessionStorage.setItem('level', level);
     displayCharacter();
 }
@@ -146,7 +157,11 @@ function editStat(stat) {
 }
 
 function saveStat(stat, value) {
-    const stats = JSON.parse(sessionStorage.getItem('stats'));
+    const stats = JSON.parse(sessionStorage.getItem('stats')) || {
+        Strength: 0, Dexterity: 0, Stamina: 0,
+        Intelligence: 0, Perception: 0, Wit: 0,
+        Charisma: 0, Manipulation: 0, Appearance: 0
+    };
     stats[stat] = parseInt(value);
     sessionStorage.setItem('stats', JSON.stringify(stats));
     displayCharacter();
@@ -161,13 +176,19 @@ function editSkill(skill) {
 }
 
 function saveSkill(skill, value) {
-    const skills = JSON.parse(sessionStorage.getItem('skills'));
+    const skills = JSON.parse(sessionStorage.getItem('skills')) || {};
     skills[skill] = parseInt(value);
     sessionStorage.setItem('skills', JSON.stringify(skills));
     displayCharacter();
 }
 
+function resetCharacter() {
+    if (confirm("Are you sure you want to reset your character? This action cannot be undone.")) {
+        sessionStorage.clear();
+        window.location.href = 'index.html'; // Redirect to character creation form
+    }
+}
+
 window.onload = function() {
     displayCharacter();
-    document.getElementById('charLevel').addEventListener('change', updateLevel);
 };
